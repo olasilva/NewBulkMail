@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Email Sender</title>
+    <link rel="stylesheet" href="bulkEmail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-envelope"></i> Bulk Email Sender</h1>
+            <p>Send emails to up to 5,000 recipients at once</p>
+        </header>
+
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
+
+        <div class="status-container" id="statusContainer" style="display: none;">
+            <h3>Sending Status</h3>
+            <div class="status-message" id="statusMessage"></div>
+            <div class="stats">
+                <span id="sentCount">0</span> sent | 
+                <span id="failedCount">0</span> failed
+            </div>
+        </div>
+
+        <form id="emailForm">
+            <div class="form-group">
+                <label for="senderEmail">From Email:</label>
+                <input type="email" id="senderEmail" required placeholder="your.email@example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="senderName">From Name (optional):</label>
+                <input type="text" id="senderName" placeholder="Your Name">
+            </div>
+
+            <div class="form-group">
+                <label for="recipients">Recipients (comma or newline separated):</label>
+                <textarea id="recipients" rows="5" required placeholder="email1@example.com, email2@example.com"></textarea>
+                <div class="info-text" id="recipientCount">0 emails detected</div>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" required placeholder="Email subject">
+            </div>
+
+            <div class="form-group">
+                <label for="emailBody">Email Content:</label>
+                <div class="email-toolbar">
+                    <button type="button" class="tool-btn" data-command="bold" title="Bold"><i class="fas fa-bold"></i></button>
+                    <button type="button" class="tool-btn" data-command="italic" title="Italic"><i class="fas fa-italic"></i></button>
+                    <button type="button" class="tool-btn" data-command="insertUnorderedList" title="Bullet List"><i class="fas fa-list-ul"></i></button>
+                    <button type="button" class="tool-btn" data-command="insertOrderedList" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                    <button type="button" class="tool-btn" data-command="createLink" title="Insert Link"><i class="fas fa-link"></i></button>
+                    <button type="button" class="tool-btn" data-command="undo" title="Undo"><i class="fas fa-undo"></i></button>
+                    <button type="button" class="tool-btn" data-command="redo" title="Redo"><i class="fas fa-redo"></i></button>
+                </div>
+                <div id="emailBody" contenteditable="true" class="editable-content"></div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="isHTML"> Send as HTML email
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="testBtn" class="btn secondary">Send Test Email</button>
+                <button type="submit" id="sendBtn" class="btn primary">Send Bulk Emails</button>
+            </div>
+        </form>
+
+        <div class="disclaimer">
+            <p><strong>Note:</strong> This is a frontend interface only. To actually send emails, you need to connect this to a backend service.</p>
+            <p>Sending bulk emails may be subject to restrictions by your email provider. Always comply with anti-spam laws.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="testModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Send Test Email</h3>
+            <div class="form-group">
+                <label for="testEmail">Test Email Address:</label>
+                <input type="email" id="testEmail" placeholder="test@example.com">
+            </div>
+            <button type="button" id="confirmTestBtn" class="btn primary">Send Test</button>
+        </div>
+    </div>
+
+    <script src="bulkEmail.js"></script>
+</body>
+</html>
